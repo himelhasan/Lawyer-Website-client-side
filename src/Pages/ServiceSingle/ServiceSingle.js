@@ -8,25 +8,27 @@ const ServiceSingle = () => {
   const { _id, image, all_review, price, reviews_rating, serviceName, description } =
     useLoaderData();
 
+  console.log(all_review);
+
   return (
     <>
       <div
         className="bg-center bg-cover bg-no-repeat "
         style={{ backgroundImage: `url(${innerBanner})` }}
       >
-        <div className="bg-cover bg-opacity-60 py-32  bg-gradient-to-r from-primary-blue ">
+        <div className="bg-cover bg-opacity-60 py-32  bg-gradient-to-r from-primary-blue px-5">
           <div className="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl">
             <h1 className=" text-5xl font-bold text-primary-golden">{serviceName}</h1>
           </div>
         </div>
       </div>
       <div
-        className="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl pt-24 pb-40 flex bg-bottom-center bg-cover bg-no-repeat "
+        className="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl pt-24 pb-40 flex flex-col-reverse px-5 lg:flex-row  bg-bottom-center bg-cover bg-no-repeat "
         style={{ backgroundImage: `url(${pagebg})` }}
       >
         {/* inside content */}
 
-        <div className="w-1/4 mr-4">
+        <div className="w-full lg:w-1/4 mr-4">
           <div className="p-10 rounded-sm bg-primary-golden m-5 text-center text-white  items-center  flex flex-col ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +53,7 @@ const ServiceSingle = () => {
             </button>
           </div>
         </div>
-        <div className="w-3/4">
+        <div className="w-full lg:w-3/4">
           <h1 className=" text-3xl font-bold text-primary-blue pb-5">
             We are the best {serviceName} Lawyers
           </h1>
@@ -89,8 +91,14 @@ const ServiceSingle = () => {
         <p className="text-2xl font-semibold text-primary-blue">
           What Our Clients Say About Us
         </p>
-        <div className="grid grid-cols-2">
-          <TestimonialsCard></TestimonialsCard>
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          {all_review.length >= 1 ? (
+            all_review.map((review) => (
+              <TestimonialsCard review={review}></TestimonialsCard>
+            ))
+          ) : (
+            <p>No Reviews Found</p>
+          )}
         </div>
       </div>
     </>
