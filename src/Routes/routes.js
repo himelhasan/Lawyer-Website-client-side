@@ -5,13 +5,11 @@ import Blog from "../Pages/Blog/Blog";
 import Contact from "../Pages/Contact/Contact";
 import ErrorElement from "../Pages/ErrorElement/ErrorElement";
 import Home from "../Pages/Home/Home";
+import Login from "../Pages/Login/Login";
+import Register from "../Pages/Register/Register";
 import Services from "../Pages/Services/Services";
-// import About from "../Pages/About/About";
-// import Blog from "../Pages/Blog/Blog";
-// import Contact from "../Pages/Contact/Contact";
-// import Login from "../Pages/Login/Login";
+import ServiceSingle from "../Pages/ServiceSingle/ServiceSingle";
 // import MyReviews from "../Pages/MyReviews/MyReviews.JS";
-// import Register from "../Pages/Register/Register";
 // import PrivateRouter from "./PrivateRouter";
 
 const routes = createBrowserRouter([
@@ -42,10 +40,18 @@ const routes = createBrowserRouter([
         },
         element: <Services></Services>,
       },
+      {
+        path: "/services/:id",
+        loader: ({ params }) => {
+          return fetch(`https://n-sage-ten.vercel.app/services/${params.id}`);
+        },
+        element: <ServiceSingle />,
+      },
+
       { path: "/about", element: <About></About> },
 
-      //   { path: "/login", element: <Login></Login> },
-      //   { path: "/register", element: <Register></Register> },
+      { path: "/login", element: <Login></Login> },
+      { path: "/register", element: <Register></Register> },
     ],
     errorElement: <ErrorElement></ErrorElement>,
   },

@@ -92,8 +92,6 @@ const HomeSlider = () => {
           </button>
         </div>
       </div>
-
-      <div className="mx-auto "></div>
     </AwesomeSlider>
   );
 };
