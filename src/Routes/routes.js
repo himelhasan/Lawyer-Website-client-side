@@ -18,7 +18,13 @@ const routes = createBrowserRouter([
     path: "/",
     element: <Main></Main>,
     children: [
-      { path: "/", element: <Home></Home> },
+      {
+        path: "/",
+        loader: () => {
+          return fetch(`https://n-sage-ten.vercel.app/services/`);
+        },
+        element: <Home></Home>,
+      },
       {
         path: "/myreviews/",
         element: (
@@ -31,7 +37,7 @@ const routes = createBrowserRouter([
       {
         path: "/services",
         loader: () => {
-          return fetch(`https://n-sage-ten.vercel.app/services`);
+          return fetch(`https://n-sage-ten.vercel.app/allservices`);
         },
         element: <Services></Services>,
       },
