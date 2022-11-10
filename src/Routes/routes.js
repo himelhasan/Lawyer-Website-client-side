@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
 import About from "../Pages/About/About";
+import AddaService from "../Pages/AddaService/AddaService";
 import Blog from "../Pages/Blog/Blog";
 import Contact from "../Pages/Contact/Contact";
 import ErrorElement from "../Pages/ErrorElement/ErrorElement";
@@ -28,6 +29,7 @@ const routes = createBrowserRouter([
         ),
       },
       { path: "/blog", element: <Blog></Blog> },
+      { path: "/addService", element: <AddaService></AddaService> },
       { path: "/contact", element: <Contact></Contact> },
       {
         path: "/services",

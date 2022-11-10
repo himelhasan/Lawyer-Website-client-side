@@ -60,41 +60,44 @@ const Header = () => {
               </Link>
             </li>
             {user ? (
-              // <div className="dropdown dropdown-end ">
-              // <ul
-              //   tabIndex={0}
-              //   className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52 text-primary-golden"
-              // ><>
               <>
-                <li>
-                  <Link
-                    to="/myreviews"
-                    className="font-medium tracking-wide text-primary-golden transition duration-200 rounded "
-                  >
-                    My Reviews
-                  </Link>
-                </li>
-                <li>
-                  <button
-                    onClick={signOut}
-                    className="font-medium tracking-wide text-primary-golden transition duration-200 rounded "
-                  >
-                    Logout
+                <div x-data="dropdown()">
+                  <button id="open-color-menu" x-spread="trigger">
+                    <div className="w-10 rounded-full avatar">
+                      <img
+                        title={user?.displayName}
+                        alt={user?.displayName}
+                        src={
+                          user?.photoURL
+                            ? user?.photoURL
+                            : "https://placeimg.com/80/80/people"
+                        }
+                      />
+                    </div>
                   </button>
-                </li>
-                <li>
-                  <div className="w-10 rounded-full avatar">
-                    <img
-                      title={user?.displayName}
-                      alt={user?.displayName}
-                      src={
-                        user?.photoURL
-                          ? user?.photoURL
-                          : "https://placeimg.com/80/80/people"
-                      }
-                    />
+                  <div
+                    class="dropdown-list right-0"
+                    id="right"
+                    x-spread="dropdown"
+                    x-cloak
+                  >
+                    <li>
+                      <Link to="/myreviews" className="dropdown-item ">
+                        My Reviews
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/addService" className="dropdown-item ">
+                        Add a Service
+                      </Link>
+                    </li>
+                    <li>
+                      <button onClick={signOut} className="dropdown-item ">
+                        Logout
+                      </button>
+                    </li>
                   </div>
-                </li>
+                </div>
               </>
             ) : (
               // </div>
@@ -216,6 +219,14 @@ const Header = () => {
                               className="font-medium tracking-wide text-primary-golden transition duration-200 rounded "
                             >
                               My Reviews
+                            </Link>
+                          </li>
+                          <li>
+                            <Link
+                              to="/addService"
+                              className="font-medium tracking-wide text-primary-golden transition duration-200 rounded "
+                            >
+                              Add a Service
                             </Link>
                           </li>
 

@@ -11,7 +11,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   const from = location.state?.from?.pathname || "/";
-
   const [err, setErr] = useState({
     email: "",
     pass: "",
@@ -70,7 +69,6 @@ const Login = () => {
         console.error(error);
       });
   };
-
   const signInWithGoogle = () => {
     gmailLogin()
       .then((res) => {

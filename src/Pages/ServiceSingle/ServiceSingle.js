@@ -1,5 +1,5 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, Navigate, useLoaderData } from "react-router-dom";
 import innerBanner from "../../Media/slider-02.png";
 import pagebg from "../../Media/practice-area.png";
 import reviewbg from "../../Media/column-2.jpg";
@@ -7,10 +7,12 @@ import TestimonialsCard from "../Shared/TestimonialsCard/TestimonialsCard";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
+import { useLocation } from "react-router-dom";
 
 const ServiceSingle = () => {
   const { _id, image, all_review, price, reviews_rating, serviceName, description } =
     useLoaderData();
+  const location = useLocation();
 
   const { user } = useContext(AuthContext);
   console.log(user?.displayName);
@@ -152,56 +154,73 @@ const ServiceSingle = () => {
                 )} */}
               </div>
             </div>
-            <div className="w-1/3  px-10 flex flex-row ">
-              <form className="w-full mx-auto text-left" onSubmit={handelSubmitReview}>
-                <label className="block text-sm mb-1 mt-4" for="name">
-                  Your Name
-                </label>
-                <input
-                  className="form-input"
-                  defaultValue={user?.displayName}
-                  id="name"
-                  name="name"
-                  readOnly
-                />
 
-                <label className="block text-sm mb-1 mt-4">Your Email</label>
-                <input
-                  className="form-input "
-                  defaultValue={user?.email}
-                  id="email"
-                  name="email"
-                  readOnly
-                />
+            {user ? (
+              <div className="w-1/3  px-10 flex flex-row ">
+                <form className="w-full mx-auto text-left" onSubmit={handelSubmitReview}>
+                  <label className="block text-sm mb-1 mt-4" for="name">
+                    Your Name
+                  </label>
+                  <input
+                    className="form-input"
+                    defaultValue={user?.displayName}
+                    id="name"
+                    name="name"
+                    readOnly
+                  />
 
-                <label className="block text-sm mb-1 mt-4">Rate us</label>
-                <input
-                  type="range"
-                  className="form-input border-none "
-                  id="reviewRange"
-                  name="reviewRange"
-                  min="1"
-                  max="5"
-                />
+                  <label className="block text-sm mb-1 mt-4">Your Email</label>
+                  <input
+                    className="form-input "
+                    defaultValue={user?.email}
+                    id="email"
+                    name="email"
+                    readOnly
+                  />
 
-                <label className="block text-sm mb-1 mt-4" for="story">
-                  Share us your feedback
-                </label>
-                <textarea
-                  className="form-input "
-                  id="review"
-                  name="review"
-                  placeholder="Use this to write your next great novel"
-                  rows="3"
-                ></textarea>
+                  <label className="block text-sm mb-1 mt-4">Rate us</label>
+                  <input
+                    type="range"
+                    className="form-input border-none "
+                    id="reviewRange"
+                    name="reviewRange"
+                    min="1"
+                    max="5"
+                  />
 
-                <input
-                  type="submit"
-                  className="btn btn-primary w-full mt-4"
-                  value="Share your Review"
-                />
-              </form>
-            </div>
+                  <label className="block text-sm mb-1 mt-4" for="story">
+                    Share us your feedback
+                  </label>
+                  <textarea
+                    className="form-input "
+                    id="review"
+                    name="review"
+                    placeholder="Use this to write your next great novel"
+                    rows="3"
+                  ></textarea>
+
+                  <input
+                    type="submit"
+                    className="btn btn-primary w-full mt-4"
+                    value="Share your Review"
+                  />
+                </form>
+              </div>
+            ) : (
+              <>
+                <div className="w-1/3  px-20 ">
+                  <p className="text-muted capitalize text-md ">
+                    Please login to share feedback
+                  </p>{" "}
+                  <Link
+                    to="/login"
+                    className="btn btn-primary bg-primary-golden w-full mt-4"
+                  >
+                    Login
+                  </Link>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
