@@ -5,7 +5,10 @@ import pagebg from "../../../Media/footer-bg-1.jpg";
 
 const Footer = () => {
   return (
-    <div className="bg-primary-blue" style={{ backgroundImage: `url(${pagebg})` }}>
+    <div
+      className="bg-primary-blue bg-cover bg-no-repeat"
+      style={{ backgroundImage: `url(${pagebg})` }}
+    >
       <footer className="px-4 py-12 mx-auto max-w-7xl ">
         <div className="grid grid-cols-2 gap-10 mb-3 md:grid-cols-3 lg:grid-cols-12 lg:gap-20">
           <div className="col-span-3">

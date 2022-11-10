@@ -4,7 +4,7 @@ const TestimonialsCard = ({ review }) => {
   const { given_by, given_review, rating, userEmail, userImage, userName } = review;
 
   return (
-    <div className="text-left">
+    <div className="text-left m-2 ">
       <div className="h-full bg-gray-100 p-8 rounded hover:shadow-lg">
         <svg
           xmlns="http://www.w3.org/2000/svg"

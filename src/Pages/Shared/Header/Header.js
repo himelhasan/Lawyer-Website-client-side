@@ -181,20 +181,13 @@ const Header = () => {
                       </li>
                       <li>
                         <Link
-                          to="/allcourses"
+                          to="/services"
                           className="font-medium tracking-wide  text-primary-golden transition-colors duration-200 hover:text-white"
                         >
-                          Courses
+                          Services
                         </Link>
                       </li>
-                      <li>
-                        <Link
-                          to="/faq"
-                          className="font-medium tracking-wide  text-primary-golden transition-colors duration-200 hover:text-white"
-                        >
-                          FAQ
-                        </Link>
-                      </li>
+
                       <li>
                         <Link
                           to="/blog"

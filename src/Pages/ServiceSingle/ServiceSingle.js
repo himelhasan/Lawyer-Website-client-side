@@ -8,16 +8,22 @@ import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const ServiceSingle = () => {
-  const { _id, image, all_review, price, reviews_rating, serviceName, description } =
-    useLoaderData();
+  const { _id, image, price, serviceName, description } = useLoaderData();
   const location = useLocation();
-
   const { user } = useContext(AuthContext);
-  console.log(user?.displayName);
   console.log(user);
-  console.log(all_review);
+
+  const [reviews, setReviews] = useState({});
+  useEffect(() => {
+    fetch(`https://n-sage-ten.vercel.app/reviews?serviceId=${_id}`)
+      .then((response) => response.json())
+      .then((data) => setReviews(data))
+      .catch((error) => console.error(error));
+  }, []);
 
   const handelSubmitReview = (e) => {
     e.preventDefault();
@@ -49,6 +55,8 @@ const ServiceSingle = () => {
         if (data.acknowledged) {
           toast.success("Rated Successfully!");
           form.reset();
+          const newReviews = [...reviews, newReview];
+          setReviews(newReviews);
         }
 
         console.log(data);
@@ -60,7 +68,7 @@ const ServiceSingle = () => {
     <>
       <div
         className="bg-center bg-cover bg-no-repeat "
-        style={{ backgroundImage: `url(${innerBanner})` }}
+        style={{ backgroundImage: `url(${image})` }}
       >
         <Toaster />
         <div className="bg-cover bg-opacity-60 py-32  bg-gradient-to-r from-primary-blue px-5">
@@ -141,22 +149,22 @@ const ServiceSingle = () => {
           <p className="text-2xl font-semibold text-primary-blue pb-12">
             What Our Clients Say About Us
           </p>
-          <div className="flex">
-            <div className="w-2/3 px-10">
+          <div className="block md:flex">
+            <div className="w-full md:w-2/3 px-10">
               {" "}
               <div className="grid grid-cols-1 md:grid-cols-2">
-                {/* {all_review.length >= 1 ? (
-                  all_review.map((review) => (
+                {reviews.length >= 1 ? (
+                  reviews.map((review) => (
                     <TestimonialsCard review={review}></TestimonialsCard>
                   ))
                 ) : (
                   <p>No Reviews Found</p>
-                )} */}
+                )}
               </div>
             </div>
 
             {user ? (
-              <div className="w-1/3  px-10 flex flex-row ">
+              <div className="w-full md:w-1/3  px-10 flex flex-row ">
                 <form className="w-full mx-auto text-left" onSubmit={handelSubmitReview}>
                   <label className="block text-sm mb-1 mt-4" for="name">
                     Your Name

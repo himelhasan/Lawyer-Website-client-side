@@ -19,7 +19,6 @@ const routes = createBrowserRouter([
     element: <Main></Main>,
     children: [
       { path: "/", element: <Home></Home> },
-
       {
         path: "/myreviews/",
         element: (
@@ -28,9 +27,7 @@ const routes = createBrowserRouter([
           </PrivateRouter>
         ),
       },
-      { path: "/blog", element: <Blog></Blog> },
-      { path: "/addService", element: <AddaService></AddaService> },
-      { path: "/contact", element: <Contact></Contact> },
+
       {
         path: "/services",
         loader: () => {
@@ -45,7 +42,9 @@ const routes = createBrowserRouter([
         },
         element: <ServiceSingle />,
       },
-
+      { path: "/blog", element: <Blog></Blog> },
+      { path: "/addService", element: <AddaService></AddaService> },
+      { path: "/contact", element: <Contact></Contact> },
       { path: "/about", element: <About></About> },
       { path: "/login", element: <Login></Login> },
       { path: "/register", element: <Register></Register> },
