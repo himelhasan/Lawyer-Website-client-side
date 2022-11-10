@@ -216,7 +216,7 @@ const ServiceSingle = () => {
               </div>
             ) : (
               <>
-                <div className="w-1/3  px-20 ">
+                <div className="w-full md:w-1/3  p-10">
                   <p className="text-muted capitalize text-md ">
                     Please login to share feedback
                   </p>{" "}
