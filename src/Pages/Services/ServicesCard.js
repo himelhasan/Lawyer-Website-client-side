@@ -6,9 +6,6 @@ const ServicesCard = ({ service }) => {
     service;
   return (
     <Link to={`/services/${_id}`} className="relative bg-white m-2 flex flex-col   my-24">
-      <span className=" bg-primary-golden text-white text-xs px-2 rounded-full  font-semibold absolute top-5 right-5 py-1">
-        {reviews_rating} Star Ratings
-      </span>
       <div
         className="bg-gray-400  text-gray-900 bg-center bg-cover bg-no-repeat pt-64"
         style={{ backgroundImage: `url(${image})` }}

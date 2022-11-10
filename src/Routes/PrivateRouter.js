@@ -10,7 +10,7 @@ const PrivateRouter = ({ children }) => {
   if (loading) {
     return (
       <HashLoader
-        color="#304FFE"
+        color="#D2AE6D"
         cssOverride={{
           margin: "0 auto",
           padding: "30vh 5vw",

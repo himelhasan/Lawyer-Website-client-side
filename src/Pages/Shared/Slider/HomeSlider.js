@@ -31,7 +31,7 @@ const HomeSlider = () => {
             Law is commonly understood as a system of rules that are <br />
             created and enforced through social or government.
           </p>
-          <button class="btn btn-primary bg-primary rounded-none px-10 py-3 my-3">
+          <button className="btn btn-primary bg-primary rounded-none px-10 py-3 my-3">
             <Link to="/contact"> Get Consultation</Link>
           </button>
         </div>
@@ -50,7 +50,7 @@ const HomeSlider = () => {
             you need legal advice. Our legal team has defended thousands of criminal
             cases.
           </p>
-          <button class="btn btn-primary bg-primary rounded-none px-10 py-3 my-3">
+          <button className="btn btn-primary bg-primary rounded-none px-10 py-3 my-3">
             <Link to="/contact"> Get Consultation</Link>
           </button>
         </div>
@@ -69,7 +69,7 @@ const HomeSlider = () => {
             <br />
             advice. Our legal team has defended thousands of criminal cases.
           </p>
-          <button class="btn btn-primary bg-primary rounded-none px-10 py-3 my-3">
+          <button className="btn btn-primary bg-primary rounded-none px-10 py-3 my-3">
             <Link to="/contact"> Get Consultation</Link>
           </button>
         </div>
@@ -87,7 +87,7 @@ const HomeSlider = () => {
             Our lawyers will also represent you in civil litigation
             <br /> cases such as divorce, child and spouse maintenance.
           </p>
-          <button class="btn btn-primary bg-primary rounded-none px-10 py-3 my-3">
+          <button className="btn btn-primary bg-primary rounded-none px-10 py-3 my-3">
             <Link to="/contact"> Get Consultation</Link>
           </button>
         </div>

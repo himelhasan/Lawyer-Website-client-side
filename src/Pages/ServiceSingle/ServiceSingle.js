@@ -2,13 +2,57 @@ import React from "react";
 import { useLoaderData } from "react-router-dom";
 import innerBanner from "../../Media/slider-02.png";
 import pagebg from "../../Media/practice-area.png";
+import reviewbg from "../../Media/column-2.jpg";
 import TestimonialsCard from "../Shared/TestimonialsCard/TestimonialsCard";
+import { useContext } from "react";
+import { AuthContext } from "../../Context/AuthProvider";
+import toast, { Toaster } from "react-hot-toast";
 
 const ServiceSingle = () => {
   const { _id, image, all_review, price, reviews_rating, serviceName, description } =
     useLoaderData();
 
+  const { user } = useContext(AuthContext);
+  console.log(user?.displayName);
+  console.log(user);
   console.log(all_review);
+
+  const handelSubmitReview = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = user?.displayName || "anonymous";
+    const email = user?.email || "anonymous";
+    const rating = form.reviewRange.value;
+    const review = form.review.value;
+    console.log(rating, review, email);
+
+    const newReview = {
+      given_review: review,
+      rating: rating,
+      userImage: user.photoURL,
+      userName: name,
+      userEmail: email,
+      serviceId: _id,
+    };
+
+    fetch("https://n-sage-ten.vercel.app/reviews", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newReview),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          toast.success("Rated Successfully!");
+          form.reset();
+        }
+
+        console.log(data);
+      })
+      .catch((err) => console.error(err));
+  };
 
   return (
     <>
@@ -16,6 +60,7 @@ const ServiceSingle = () => {
         className="bg-center bg-cover bg-no-repeat "
         style={{ backgroundImage: `url(${innerBanner})` }}
       >
+        <Toaster />
         <div className="bg-cover bg-opacity-60 py-32  bg-gradient-to-r from-primary-blue px-5">
           <div className="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl">
             <h1 className=" text-5xl font-bold text-primary-golden">{serviceName}</h1>
@@ -34,13 +79,13 @@ const ServiceSingle = () => {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
-              class="w-8 h-8"
+              className="w-8 h-8"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
               />
             </svg>
@@ -62,43 +107,102 @@ const ServiceSingle = () => {
         </div>
       </div>
 
-      <section class="text-white bg-primary-golden ">
-        <div class="flex flex-col items-stretch justify-between px-4 py-20 mx-auto max-w-7xl lg:flex-row sm:items-center">
+      <section className="text-white bg-primary-golden ">
+        <div className="flex flex-col items-stretch justify-between px-4 py-20 mx-auto max-w-7xl lg:flex-row sm:items-center">
           <div>
-            <h2 class="mb-1 text-xl font-semibold text-left sm:text-2xl sm:text-center lg:text-left">
+            <h2 className="mb-1 text-xl font-semibold text-left sm:text-2xl sm:text-center lg:text-left">
               Contact Us to Learn More about Your Rights Following an {serviceName}
             </h2>
-            <p class="mb-6 text-lg font-normal text-left text-gray-200 sm:text-xl lg:mb-0 sm:text-center lg:text-left">
+            <p className="mb-6 text-lg font-normal text-left text-gray-200 sm:text-xl lg:mb-0 sm:text-center lg:text-left">
               Let us help you!
             </p>
           </div>
-          <div class="flex flex-col mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-2 sm:space-y-0">
-            <a href="#" class="w-full btn btn-light btn-lg sm:w-auto">
+          <div className="flex flex-col mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-2 sm:space-y-0">
+            <a href="#" className="w-full btn btn-light btn-lg sm:w-auto">
               Call Now
             </a>
-            <a href="#" class="w-full btn btn-outline-light btn-lg sm:w-auto">
+            <a href="#" className="w-full btn btn-outline-light btn-lg sm:w-auto">
               Book a Meeting
             </a>
           </div>
         </div>
       </section>
-
       <div
-        className="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl py-24  bg-bottom-center bg-cover bg-no-repeat text-center"
-        // style={{ backgroundImage: `url(${pagebg})` }}
+        className="bg-center bg-cover bg-no-repeat "
+        style={{ backgroundImage: `url(${reviewbg})` }}
       >
-        <h1 className="text-5xl font-bold text-primary-blue py-2">Clients Reviews</h1>
-        <p className="text-2xl font-semibold text-primary-blue">
-          What Our Clients Say About Us
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2">
-          {all_review.length >= 1 ? (
-            all_review.map((review) => (
-              <TestimonialsCard review={review}></TestimonialsCard>
-            ))
-          ) : (
-            <p>No Reviews Found</p>
-          )}
+        <div
+          className="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl py-24  bg-bottom-center bg-cover bg-no-repeat text-center"
+          // style={{ backgroundImage: `url(${pagebg})` }}
+        >
+          <h1 className="text-5xl font-bold text-primary-blue py-2">Clients Reviews</h1>
+          <p className="text-2xl font-semibold text-primary-blue pb-12">
+            What Our Clients Say About Us
+          </p>
+          <div className="flex">
+            <div className="w-2/3 px-10">
+              {" "}
+              <div className="grid grid-cols-1 md:grid-cols-2">
+                {/* {all_review.length >= 1 ? (
+                  all_review.map((review) => (
+                    <TestimonialsCard review={review}></TestimonialsCard>
+                  ))
+                ) : (
+                  <p>No Reviews Found</p>
+                )} */}
+              </div>
+            </div>
+            <div className="w-1/3  px-10 flex flex-row ">
+              <form className="w-full mx-auto text-left" onSubmit={handelSubmitReview}>
+                <label className="block text-sm mb-1 mt-4" for="name">
+                  Your Name
+                </label>
+                <input
+                  className="form-input"
+                  defaultValue={user?.displayName}
+                  id="name"
+                  name="name"
+                  readOnly
+                />
+
+                <label className="block text-sm mb-1 mt-4">Your Email</label>
+                <input
+                  className="form-input "
+                  defaultValue={user?.email}
+                  id="email"
+                  name="email"
+                  readOnly
+                />
+
+                <label className="block text-sm mb-1 mt-4">Rate us</label>
+                <input
+                  type="range"
+                  className="form-input border-none "
+                  id="reviewRange"
+                  name="reviewRange"
+                  min="1"
+                  max="5"
+                />
+
+                <label className="block text-sm mb-1 mt-4" for="story">
+                  Share us your feedback
+                </label>
+                <textarea
+                  className="form-input "
+                  id="review"
+                  name="review"
+                  placeholder="Use this to write your next great novel"
+                  rows="3"
+                ></textarea>
+
+                <input
+                  type="submit"
+                  className="btn btn-primary w-full mt-4"
+                  value="Share your Review"
+                />
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </>

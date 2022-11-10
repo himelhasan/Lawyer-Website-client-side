@@ -6,11 +6,11 @@ import Contact from "../Pages/Contact/Contact";
 import ErrorElement from "../Pages/ErrorElement/ErrorElement";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
+import MyReviews from "../Pages/MyReviews/MyReviews";
 import Register from "../Pages/Register/Register";
 import Services from "../Pages/Services/Services";
 import ServiceSingle from "../Pages/ServiceSingle/ServiceSingle";
-// import MyReviews from "../Pages/MyReviews/MyReviews.JS";
-// import PrivateRouter from "./PrivateRouter";
+import PrivateRouter from "./PrivateRouter";
 
 const routes = createBrowserRouter([
   {
@@ -18,19 +18,15 @@ const routes = createBrowserRouter([
     element: <Main></Main>,
     children: [
       { path: "/", element: <Home></Home> },
-      //   { path: "/about", element: <About></About> },
 
-      //   {
-      //     path: "/checkout/:id",
-      //     loader: ({ params }) => {
-      //       return fetch(`https://course-data-server.vercel.app/course/${params.id}`);
-      //     },
-      //     element: (
-      //       <PrivateRouter>
-      //         <MyReviews></MyReviews>
-      //       </PrivateRouter>
-      //     ),
-      //   },
+      {
+        path: "/myreviews/",
+        element: (
+          <PrivateRouter>
+            <MyReviews></MyReviews>
+          </PrivateRouter>
+        ),
+      },
       { path: "/blog", element: <Blog></Blog> },
       { path: "/contact", element: <Contact></Contact> },
       {
@@ -49,7 +45,6 @@ const routes = createBrowserRouter([
       },
 
       { path: "/about", element: <About></About> },
-
       { path: "/login", element: <Login></Login> },
       { path: "/register", element: <Register></Register> },
     ],
