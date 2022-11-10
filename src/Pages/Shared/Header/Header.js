@@ -60,11 +60,32 @@ const Header = () => {
               </Link>
             </li>
             {user ? (
-              <div className="dropdown dropdown-end">
-                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                  <div className="w-10 rounded-full">
+              // <div className="dropdown dropdown-end ">
+              // <ul
+              //   tabIndex={0}
+              //   className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52 text-primary-golden"
+              // ><>
+              <>
+                <li>
+                  <Link
+                    to="/myreviews"
+                    className="font-medium tracking-wide text-primary-golden transition duration-200 rounded "
+                  >
+                    My Reviews
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    onClick={signOut}
+                    className="font-medium tracking-wide text-primary-golden transition duration-200 rounded "
+                  >
+                    Logout
+                  </button>
+                </li>
+                <li>
+                  <div className="w-10 rounded-full avatar">
                     <img
-                      title={user.displayName}
+                      title={user?.displayName}
                       alt={user?.displayName}
                       src={
                         user?.photoURL
@@ -73,23 +94,10 @@ const Header = () => {
                       }
                     />
                   </div>
-                </label>
-                <ul
-                  tabIndex={0}
-                  className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
-                >
-                  <li>
-                    <Link className="justify-between">
-                      {user?.displayName ? user?.displayName : "Profile"}
-                    </Link>
-                  </li>
-
-                  <li>
-                    <button onClick={signOut}>Logout</button>
-                  </li>
-                </ul>
-              </div>
+                </li>
+              </>
             ) : (
+              // </div>
               <ul className="flex items-center lg:flex">
                 <li>
                   <Link
@@ -136,7 +144,7 @@ const Header = () => {
                         to="/"
                         aria-label="Company"
                         title="Company"
-                        className="inline-flex items-center justify-center"
+                        className="inline-flex justify-left"
                       >
                         <img src={logoBlack} style={{ width: "40%" }} alt="" />
                       </Link>
@@ -159,7 +167,7 @@ const Header = () => {
                   </div>
                   <nav>
                     {/* mobile */}
-                    <ul className="space-y-4 text-center">
+                    <ul className="space-y-4 ">
                       <li>
                         <Link
                           to="/about"
@@ -200,6 +208,54 @@ const Header = () => {
                           Contact us
                         </Link>
                       </li>
+                      {user ? (
+                        <>
+                          <li>
+                            <Link
+                              to="/myreviews"
+                              className="font-medium tracking-wide text-primary-golden transition duration-200 rounded "
+                            >
+                              My Reviews
+                            </Link>
+                          </li>
+
+                          <li>
+                            <div className="w-10 rounded-full avatar">
+                              <img
+                                title={user?.displayName}
+                                alt={user?.displayName}
+                                src={
+                                  user?.photoURL
+                                    ? user?.photoURL
+                                    : "https://placeimg.com/80/80/people"
+                                }
+                              />
+                            </div>
+                          </li>
+                          <li>
+                            <button
+                              onClick={signOut}
+                              className="font-medium tracking-wide text-primary-golden transition duration-200 rounded "
+                            >
+                              Logout
+                            </button>
+                          </li>
+                        </>
+                      ) : (
+                        // </div>
+                        <ul className="flex items-center lg:flex">
+                          <li>
+                            <Link
+                              to="/login"
+                              className="font-medium tracking-wide text-primary-golden transition duration-200 rounded "
+                              aria-label="Login"
+                              title="Login"
+                            >
+                              Login
+                            </Link>
+                          </li>
+                        </ul>
+                      )}
                     </ul>
                   </nav>
                 </div>

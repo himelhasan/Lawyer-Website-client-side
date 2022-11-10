@@ -34,7 +34,7 @@ const MyReviews = () => {
       </>
       <div className="mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl">
         {/* inside content */}
-        <h1 className=" text-3xl font-bold text-primary-golden">
+        <h1 className=" text-3xl font-bold text-primary-golden pt-10 text-center text-primary-blue">
           My Total Reviews : {reviews.length}
         </h1>
 
