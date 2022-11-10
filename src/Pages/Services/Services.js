@@ -6,7 +6,6 @@ import { useState } from "react";
 import button from "kutty/src/button";
 import { useEffect } from "react";
 const Services = () => {
-  // const { services, count } = useLoaderData();
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(6);
   const [count, setCount] = useState(0);

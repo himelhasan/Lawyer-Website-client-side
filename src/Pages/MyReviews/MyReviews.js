@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 import innerBanner from "../../Media/meeting-1.jpg";
-import TestimonialsCard from "../Shared/TestimonialsCard/TestimonialsCard";
+import EditableTestimonialsCard from "../Shared/EditableTestimonialsCard/EditableTestimonialsCard";
+import toast, { Toaster } from "react-hot-toast";
 
 const MyReviews = () => {
   const { user } = useContext(AuthContext);
@@ -17,7 +18,37 @@ const MyReviews = () => {
       .catch((error) => console.error(error));
   }, [user?.email]);
 
+  // const [modifiedReviews, setModifiedReviews] = useState({ reviews });
+
+  // console.log(modifiedReviews, "modifiedReviews");
   console.log(reviews);
+
+  const handelDeleteReview = (review) => {
+    const agree = window.confirm("Are you sure you want to delete  this review");
+    if (agree) {
+      fetch(`https://n-sage-ten.vercel.app/reviews/${review._id}`, {
+        method: "DELETE",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+
+          if (data.deletedCount > 0) {
+            toast.success(`Successfully Deleted!`);
+            const remainingReviews = reviews.filter((rvw) => rvw._id !== review._id);
+            setReviews(remainingReviews);
+          }
+        })
+        .catch((error) => console.log(error));
+
+      //   toast.promise(saveSettings(settings), {
+      //     loading: "Saving...",
+      //     success: <b>Settings saved!</b>,
+      //     error: <b>Could not save.</b>,
+      //   });
+    }
+  };
+
   return (
     <div>
       <>
@@ -44,7 +75,14 @@ const MyReviews = () => {
           ))} */}
 
           {reviews.length >= 1 ? (
-            reviews.map((review) => <TestimonialsCard review={review}></TestimonialsCard>)
+            reviews.map((review) => (
+              <EditableTestimonialsCard
+                review={review}
+                handelDeleteReview={handelDeleteReview}
+              >
+                {" "}
+              </EditableTestimonialsCard>
+            ))
           ) : (
             <p>No Reviews Found</p>
           )}
