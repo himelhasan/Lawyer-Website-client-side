@@ -1,4 +1,4 @@
-# Photographer React App
+# Lawyer Website
 
 ## Github Links
 
